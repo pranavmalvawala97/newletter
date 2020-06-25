@@ -77,6 +77,7 @@ const NewletterForm = () => {
         .catch((err) => console.log(err));
       setImageInText(image);
     }
+    console.log(imageInText);
   };
 
   const handleAddToText = () => {
