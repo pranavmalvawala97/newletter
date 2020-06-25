@@ -97,12 +97,8 @@ const Payment = (props) => {
       {stripeData && (
         <div>
           <ul>
-            <li>
-              access token - <p>{stripeData.accessToken}</p>
-            </li>
-            <li>
-              refresh token - <p>{stripeData.refreshToken}</p>
-            </li>
+            <li>access token -{stripeData.accessToken}</li>
+            <li>refresh token - {stripeData.refreshToken}</li>
             <li>user id - {stripeData.userId}</li>
           </ul>
         </div>
