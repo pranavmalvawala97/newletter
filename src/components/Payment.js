@@ -93,20 +93,20 @@ const Payment = (props) => {
         {showMessage && (
           <p style={{ textAlign: "center" }}>Saved successfully!!</p>
         )}
-        {stripeData && (
-          <div>
-            <ul>
-              <li>
-                access token - <p>{stripeData.accessToken}</p>
-              </li>
-              <li>
-                refresh token - <p>{stripeData.refreshToken}</p>
-              </li>
-              <li>user id - {stripeData.userId}</li>
-            </ul>
-          </div>
-        )}
       </div>
+      {stripeData && (
+        <div>
+          <ul>
+            <li>
+              access token - <p>{stripeData.accessToken}</p>
+            </li>
+            <li>
+              refresh token - <p>{stripeData.refreshToken}</p>
+            </li>
+            <li>user id - {stripeData.userId}</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
