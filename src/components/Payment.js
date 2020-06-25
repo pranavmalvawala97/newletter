@@ -5,6 +5,7 @@ const Payment = (props) => {
   const [yearly, setYearly] = useState("");
   const [monthly, setMonthly] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [stripeData, setStripeData] = useState(null);
   const queryString = window.location.search;
 
   const handleSave = () => {
@@ -25,7 +26,15 @@ const Payment = (props) => {
     if (code) {
       axios
         .post("http://localhost:9000/stripe", { code })
-        .then((res) => console.log(res))
+        .then((res) => {
+          if (res.data.message === "success") {
+            setStripeData({
+              accessToken: res.data.access_token,
+              refreshToken: res.data.refresh_token,
+              userId: res.data.stripe_user_id,
+            });
+          }
+        })
         .catch((err) => console.log(err));
     }
   }, [queryString]);
@@ -83,6 +92,15 @@ const Payment = (props) => {
         </div>
         {showMessage && (
           <p style={{ textAlign: "center" }}>Saved successfully!!</p>
+        )}
+        {stripeData && (
+          <div>
+            <ul>
+              <li>access token - {stripeData.accessToken}</li>
+              <li>refresh token - {stripeData.refreshToken}</li>
+              <li>user id - {stripeData.userId}</li>
+            </ul>
+          </div>
         )}
       </div>
     </div>
