@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import uploadImg from "../images/file-upload.png";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../config";
 
 const NewletterForm = () => {
   const [mainImage, setMainImage] = useState(null);
@@ -21,7 +22,7 @@ const NewletterForm = () => {
     event.preventDefault();
 
     axios
-      .post("http://localhost:9000/create", {
+      .post(`${BASE_URL}/create`, {
         image: resMainImage,
         title,
         description,
@@ -53,7 +54,7 @@ const NewletterForm = () => {
       data.append("file", image);
 
       axios
-        .post("http://localhost:9000/image-upload", data)
+        .post(`${BASE_URL}/image-upload`, data)
         .then((res) => {
           setResMainImage(res.data.path);
         })
@@ -69,7 +70,7 @@ const NewletterForm = () => {
       data.append("file", image);
 
       axios
-        .post("http://localhost:9000/image-upload", data)
+        .post(`${BASE_URL}/image-upload`, data)
         .then((res) => {
           setResTextImage(res.data.path);
           setAddText(res.data.path);

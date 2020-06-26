@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { BASE_URL } from "../config";
 
 const Payment = (props) => {
   const [yearly, setYearly] = useState("");
@@ -11,7 +12,10 @@ const Payment = (props) => {
   const handleSave = () => {
     console.log("clicked", typeof yearly);
     axios
-      .post("http://localhost:9000/payment", { yearly, monthly })
+      .post(`${BASE_URL}/payment`, {
+        yearly,
+        monthly,
+      })
       .then((res) => {
         setShowMessage(true);
         setMonthly("");
@@ -25,7 +29,9 @@ const Payment = (props) => {
     const code = urlParams.get("code");
     if (code) {
       axios
-        .post("http://localhost:9000/stripe", { code })
+        .post(`${BASE_URL}/stripe`, {
+          code,
+        })
         .then((res) => {
           if (res.data.message === "success") {
             setStripeData({
